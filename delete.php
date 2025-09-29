@@ -1,7 +1,10 @@
-<?php require 'conexion.php'; ?>
+<?php require 'conection.php'; ?>
 <?php
-$id = $_POST['id'];
-$conexion->query("DELETE FROM productos WHERE id=$id");
-echo "🗑️ Producto eliminado.";
+if ($accion == "eliminar") {
+
+$eliminar = "DELETE FROM productos WHERE id=$id";
+mysqli_query(mysql: $conection, query: $eliminar);
+
+}
 ?>
-<a href="listar.php">🔙 Volver</a>
+<a href="list.php">🔙 Volver</a>
