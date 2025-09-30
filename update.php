@@ -1,4 +1,5 @@
 <?php require 'conection.php'; ?>
+<?php require 'variables.php'; ?>
 <!DOCTYPE html>
 <html lang="en">
 
