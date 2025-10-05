@@ -1,33 +1,41 @@
+<?php require 'conection.php'; ?>
+<?php require 'variables.php'; ?>
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css"
-        integrity="sha384-tViUnnbYAV00FLIhhi3v/dWt3Jxw4gZQcNoSCxCIFNJVCx7/D55/wXsrNIRANwdD" crossorigin="anonymous">
-    <link rel="stylesheet" href="style.css">
-    <title>CRUD-PHP-MYSQL</title>
+    <title>Panel de Almacén</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
-
 <body>
-    <div id="principal">
-        <div class="card">
-            <header>
-                <h1>Gestión de productos en almacén</h1>
-            </header>
-            <main>
-                <section>
-                    <a href="list.php">📋 Ver productos</a><br>
-                    
-                </section>
-            </main>
-            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
-                integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
-                crossorigin="anonymous"></script>
-        </div>
-</body>
+    <div class="container py-5">
+        <h1 class="mb-4 text-center">🗃️ Panel de Almacén</h1>
 
+        <div class="row g-4">
+            <div class="col-md-6">
+                <div class="card border-primary">
+                    <div class="card-body">
+                        <h5 class="card-title">📦 Productos</h5>
+                        <p class="card-text">Gestiona los productos del almacén.</p>
+                        <a href="list.php" class="btn btn-primary">Ir a Productos</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="card border-secondary">
+                    <div class="card-body">
+                        <h5 class="card-title">🏷️ Categorías</h5>
+                        <p class="card-text">Administra las categorías disponibles.</p>
+                        <a href="categorias.php" class="btn btn-secondary">Ir a Categorías</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer class="text-center mt-5">
+            <small>Desarrollado por Jennifer González</small>
+        </footer>
+    </div>
+</body>
 </html>
