@@ -6,66 +6,93 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css"
-        integrity="sha384-tViUnnbYAV00FLIhhi3v/dWt3Jxw4gZQcNoSCxCIFNJVCx7/D55/wXsrNIRANwdD" crossorigin="anonymous">
-    <link rel="stylesheet" href="style.css">
-    <title>update</title>
+    <title>Modificar producto</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
 </head>
 
-<body>
+<body class="container py-4">
+
     <?php
-    
-    if ($accion == "actualizar") {
+    if ($accion === "actualizar") {
+        $actualizar = "UPDATE productos SET 
+            nombre='$nombre', 
+            categoria_id='$categoria_id', 
+            precio='$precio', 
+            stock='$stock' 
+            WHERE id='$idAntiguo'";
 
-
-        $actualizar = "UPDATE productos SET id='$id', nombre='$nombre', categoria='$categoria', precio='$precio' WHERE id='$idAntiguo'";
-        mysqli_query(mysql: $conection, query: $actualizar);
-
-    } 
-
-    $consulta = mysqli_query(mysql: $conection, query: "SELECT id, nombre, categoria, precio, stock FROM productos");
-    while ($registro = mysqli_fetch_array(result: $consulta)) { 
-         if (($accion == 'modificar') && ($id == $registro['id'])) {
+        mysqli_query($conection, $actualizar);
+        echo "<div class='alert alert-success'>Producto actualizado correctamente.</div>";
+    }
     ?>
 
-        <tr class="fila-modificable">
-            <form action="#" method="post">
-                <td><input type="text" name="id" value="<?= $registro["id"] ?>"></td>
-                <td><input type="text" name="nombre" value="<?= $registro["nombre"] ?>"></td>
-                <td><input type="text" name="categoria" value="<?= $registro["categoria"] ?>"></td>
-                <td><input type="text" name="precio" value="<?= $registro["precio"] ?>"></td>
-                <td><input type="text" name="stock" value="<?= $registro["stock"] ?>"></td>
-                <td>
-                    <input type="hidden" name="accion" value="actualizar">
-                    <input type="hidden" name="idAntiguo" value="<?= $registro["id"] ?>">
-                    <button type="submit" class="btn btn-success">
-                        <i class="bi bi-check-circle"></i>
-                        Aceptar
-                    </button>
+    <h2>Modificar producto</h2>
 
-                </td>
-            </form>
-            <td>
-                <form action="#" method="post">
-                    <button type="submit" class="btn btn-danger">
-                        <i class="bi bi-x-lg"></i>
-                        Cancelar
-                    </button>
-                </form>
-            </td>
-        </tr>
-    <?php
-         }
-    } ?>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Categoría</th>
+                <th>Precio</th>
+                <th>Stock</th>
+                <th colspan="2">Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php
+            $consulta = mysqli_query($conection, "SELECT id, nombre, categoria_id, precio, stock FROM productos");
 
-   
-    <a href="list.php">🔙 Volver</a>
+            while ($registro = mysqli_fetch_array($consulta)) {
+                if ($accion == 'modificar' && $id == $registro['id']) {
+            ?>
+                    <tr class="table-warning">
+                        <form action="#" method="post">
+                            <td><?= $registro["id"] ?></td>
+                            <td><input type="text" name="nombre" value="<?= $registro["nombre"] ?>" required></td>
+                            <td>
+                                <select name="categoria_id" required>
+                                    <option value="">Selecciona</option>
+                                    <?php
+                                    $categorias = mysqli_query($conection, "SELECT categoria_id, nombre FROM categorias");
+                                    while ($cat = mysqli_fetch_array($categorias)) {
+                                        $selected = ($cat['categoria_id'] == $registro['categoria_id']) ? 'selected' : '';
+                                        echo "<option value='{$cat['categoria_id']}' $selected>{$cat['nombre']}</option>";
+                                    }
+                                    ?>
+                                </select>
+                            </td>
+                            <td><input type="number" name="precio" step="0.01" value="<?= $registro["precio"] ?>" required></td>
+                            <td><input type="number" name="stock" value="<?= $registro["stock"] ?>" required></td>
+                            <td>
+                                <input type="hidden" name="accion" value="actualizar">
+                                <input type="hidden" name="idAntiguo" value="<?= $registro["id"] ?>">
+                                <button type="submit" class="btn btn-success btn-sm">
+                                    <i class="bi bi-check-circle"></i> Aceptar
+                                </button>
+                            </td>
+                        </form>
+                        <td>
+                            <form action="#" method="post">
+                                <button type="submit" class="btn btn-danger btn-sm">
+                                    <i class="bi bi-x-lg"></i> Cancelar
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+            <?php
+                }
+            }
+            ?>
+        </tbody>
+    </table>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
-        crossorigin="anonymous"></script>
+    <a href="list.php" class="btn btn-secondary mt-3">
+        <i class="bi bi-arrow-left-circle"></i> Volver
+    </a>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>

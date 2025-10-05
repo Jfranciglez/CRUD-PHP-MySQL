@@ -3,6 +3,7 @@
   $id = $_POST["id"] ?? "";
   $idAntiguo = $_POST["idAntiguo"] ?? "";
   $nombre = $_POST["nombre"] ?? "";
-  $categoria = $_POST["categoria"] ?? "";
+  $categoria_id = $_POST["categoria_id"] ?? "";
   $precio = $_POST["precio"] ?? "";
   $stock = $_POST["stock"] ?? "";
+  $nombre_cat = $_POST['nombre_categoria']?? "";
