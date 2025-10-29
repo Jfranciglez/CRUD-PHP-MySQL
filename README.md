@@ -17,4 +17,4 @@ Gestión de un Almacén de Productos lácteos
 
 * Interfaz moderna y responsive: Utiliza Bootstrap para una apariencia limpia, profesional y adaptada a dispositivos móviles y de escritorio.
 
-Renderizado en <a https://jfranciglez.alwaysdata.net/ </a> 
+Renderizado en  https://jfranciglez.alwaysdata.net/  
