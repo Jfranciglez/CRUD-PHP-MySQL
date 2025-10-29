@@ -16,3 +16,5 @@ Gestión de un Almacén de Productos lácteos
 * Validación básica de formularios: Asegura que los datos ingresados sean completos y correctos antes de procesarlos.
 
 * Interfaz moderna y responsive: Utiliza Bootstrap para una apariencia limpia, profesional y adaptada a dispositivos móviles y de escritorio.
+
+Renderizado en <a https://jfranciglez.alwaysdata.net/ </a> 
